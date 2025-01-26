@@ -39,17 +39,24 @@ async function getUserById(id) {
 
 async function updateUser(id, user) {
   const request = new sql.Request();
-  const hashedPassword = crypto.createHash('sha256').update(user.password).digest('hex');
-  const query = `
+  let query = `
     UPDATE Users
-    SET username = @username, password = @password, role = @role, is_active = @is_active
-    WHERE id = @id
+    SET username = @username, role = @role, is_active = @is_active
   `;
-  request.input("id", sql.Int, id);
+
   request.input("username", sql.NVarChar, user.username);
-  request.input("password", sql.NVarChar, hashedPassword);
   request.input("role", sql.NVarChar, user.role);
   request.input("is_active", sql.Bit, user.is_active);
+  request.input("id", sql.Int, id);
+
+  if (user.password && user.password.trim() !== '') {
+    const hashedPassword = crypto.createHash('sha256').update(user.password).digest('hex');
+    query += `, password = @password`;
+    request.input("password", sql.NVarChar, hashedPassword);
+  }
+
+  query += ` WHERE id = @id`;
+
   await request.query(query);
 }
 
