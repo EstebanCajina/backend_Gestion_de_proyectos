@@ -14,8 +14,8 @@ async function getUsers(req, res) {
 async function addUser(req, res) {
   try {
     const user = req.body;
-    await userService.addUser(user);
-    res.status(201).send('Usuario agregado correctamente');
+    const userId = await userService.addUser(user);
+    res.status(201).json({ message: 'Usuario agregado correctamente', userId: userId });
   } catch (err) {
     res.status(500).send(err.message);
   }

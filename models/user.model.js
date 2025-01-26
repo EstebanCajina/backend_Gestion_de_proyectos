@@ -13,16 +13,19 @@ async function addUser(user) {
   const hashedPassword = crypto.createHash('sha256').update(user.password).digest('hex');
   const query = `
     INSERT INTO Users (username, password, role, profile_picture, is_active)
-    VALUES (@username, @password, @role, @profile_picture, @is_active)
+    VALUES (@username, @password, @role, @profile_picture, @is_active);
+    SELECT SCOPE_IDENTITY() AS id;
   `;
   request.input("username", sql.NVarChar, user.username);
   request.input("password", sql.NVarChar, hashedPassword);
   request.input("role", sql.NVarChar, user.role);
   request.input("profile_picture", sql.NVarChar, user.profile_picture);
   request.input("is_active", sql.Bit, user.is_active);
-  await request.query(query);
-}
+  const result = await request.query(query);
+  const userId = result.recordset[0].id;
 
+  return userId;
+}
 async function getUserById(id) {
   const request = new sql.Request();
   const query = `
