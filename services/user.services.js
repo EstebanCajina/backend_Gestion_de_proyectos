@@ -37,3 +37,4 @@ async function updateProfilePicture(id, profile_picture) {
 }
 
 module.exports = { getAllUsers, addUser, getUserById, updateUser, deleteUser, loginUser, logoutUser, validUsername, updateProfilePicture };
+

@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const { connectDB } = require('./config/db.config');
 const userRoutes = require('./routes/user.route');
+const vehicleRoutes = require('./routes/vehicle.route'); 
+const maintenanceRoutes = require('./routes/maintenance.route'); 
 const path = require('path');
 
 const app = express();
@@ -19,6 +21,8 @@ const corsOptions = {
 app.use(cors(corsOptions)); // Permitir solicitudes desde cualquier origen
 app.use(express.json());
 app.use('/api/users', userRoutes);
+app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/maintenances', maintenanceRoutes); 
 
 app.listen(port, () => {
   console.log(`Servidor iniciado en el puerto http://localhost:${port}`);
