@@ -7,5 +7,6 @@ router.post('/', maintenanceController.addMaintenances);// POST /api/maintenance
 router.get('/:id', maintenanceController.getMaintenanceById); // GET /api/maintenances:id
 router.put('/:id', maintenanceController.updateMaintenance);// PUT /api/maintenances:id
 router.delete('/:id', maintenanceController.deleteMaintenance);// DELETE /api/maintenances:id
+router.get('/plate/:plate', maintenanceController.getMaintenanceByPlate); // GET /api/maintenances/plate/:id
 
 module.exports = router;

@@ -9,6 +9,19 @@ async function getMaintenances(req, res) {
   }
 }
 
+async function getMaintenanceByPlate(req, res) {
+  try {
+    const plate = req.params.plate;
+    const maintenance = await maintenanceService.getMaintenanceByPlate(plate);
+    if (!maintenance) {
+      return res.status(404).send('Mantenimiento no encontrado');
+    }
+    res.json(maintenance);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+}
+
 async function addMaintenances(req, res) {
   try {
     const maintenances = req.body;  // Suponiendo que la lista de mantenimientos está en el cuerpo de la solicitud
@@ -67,4 +80,4 @@ async function deleteMaintenance(req, res) {
   }
 }
 
-module.exports = { getMaintenances, addMaintenances, getMaintenanceById, updateMaintenance, deleteMaintenance };
+module.exports = { getMaintenances, getMaintenanceByPlate , addMaintenances, getMaintenanceById, updateMaintenance, deleteMaintenance };
