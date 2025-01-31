@@ -64,7 +64,7 @@ async function getVehicleById(id) {
   const request = new sql.Request();
   const query = `
     SELECT * FROM Vehicles
-    WHERE id = @id AND is_active = 1
+    WHERE id = @id
   `;
   request.input("id", sql.Int, id);
   const result = await request.query(query);
@@ -75,7 +75,7 @@ async function updateVehicle(id, vehicle) {
   const request = new sql.Request();
 
   // Verifica que el vehículo exista antes de actualizarlo
-  const checkQuery = `SELECT * FROM Vehicles WHERE id = @id AND is_active = 1`;
+  const checkQuery = `SELECT * FROM Vehicles WHERE id = @id`;
   request.input("id", sql.Int, id);
 
   const result = await request.query(checkQuery);
@@ -90,7 +90,7 @@ async function updateVehicle(id, vehicle) {
     UPDATE Vehicles
     SET region = @Region, dependency = @Dependency, plate = @Plate, asset_code = @AssetCode,
         heritage = @Heritage, brand = @Brand, style = @Style, model_year = @ModelYear, is_active = @IsActive
-    WHERE id = @id AND is_active = 1
+    WHERE id = @id
   `;
   
   request.input("Region", sql.NVarChar, vehicle.region);
@@ -132,4 +132,21 @@ async function deleteVehicle(id) {
   return { id, is_active: 0 }; // Retorna el vehículo inactivo
 }
 
-module.exports = { getAllVehicles, addVehicle, getVehicleById, updateVehicle, deleteVehicle };
+//Validar que una placa no exista en la base de datos
+async function checkPlate(plate) {
+  const request = new sql.Request();
+  const query = `
+    SELECT id FROM Vehicles
+    WHERE plate = @plate
+  `;
+  request.input("plate", sql.NVarChar, plate);
+  const result = await request.query(query);
+  if (result.recordset.length > 0) {
+    return { exists: true, id: result.recordset[0].id };
+  } else {
+    return { exists: false };
+  }
+}
+
+
+module.exports = { getAllVehicles, addVehicle, getVehicleById, updateVehicle, deleteVehicle, checkPlate };

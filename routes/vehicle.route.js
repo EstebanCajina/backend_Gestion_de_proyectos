@@ -10,5 +10,5 @@ router.post('/',verifyToken, checkRole(['Administrador']),vehicleController.addV
 router.get('/:id',verifyToken, checkRole(['Administrador']),vehicleController.getVehicleById); // GET /api/vehicles/:id
 router.put('/:id', verifyToken, checkRole(['Administrador']),vehicleController.updateVehicle); // PUT /api/vehicles/:id
 router.delete('/:id',verifyToken, checkRole(['Administrador']),vehicleController.deleteVehicle); // DELETE /api/vehicles/:id
-
+router.get('/check/:plate',verifyToken, checkRole(['Administrador']),vehicleController.checkPlate); // GET /api/vehicles/check/:plate
 module.exports = router;

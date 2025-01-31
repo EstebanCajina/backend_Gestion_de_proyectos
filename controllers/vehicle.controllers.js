@@ -78,5 +78,16 @@ async function deleteVehicle(req, res) {
   }
 }
 
-module.exports = { getVehicles, getVehicleById, updateVehicle, deleteVehicle,addVehicles };
+async function checkPlate(req, res) {
+  try {
+    const plate = req.params.plate;
+    console.log(plate);
+    const exists = await vehicleService.checkPlate(plate);
+    res.json(exists);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+}
+
+module.exports = { getVehicles, getVehicleById, updateVehicle, deleteVehicle,addVehicles, checkPlate };
 

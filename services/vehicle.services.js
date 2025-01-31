@@ -20,4 +20,8 @@ async function deleteVehicle(id) {
   return await vehicleModel.deleteVehicle(id);
 }
 
-module.exports = { getAllVehicles, addVehicle,  getVehicleById, updateVehicle, deleteVehicle };
+async function checkPlate(plate) {
+  return await vehicleModel.checkPlate(plate);
+}
+
+module.exports = { getAllVehicles, addVehicle,  getVehicleById, updateVehicle, deleteVehicle, checkPlate };
