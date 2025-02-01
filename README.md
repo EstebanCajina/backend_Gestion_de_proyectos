@@ -42,126 +42,18 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local.
    ```bash
    git clone https://git.ucr.ac.cr/grupo_1_gestion_2025/Backend.git
 
-   
-Navega al directorio del proyecto:
-
-bash
-Copy
-cd Backend
-Instala las dependencias:
-
-bash
-Copy
-npm install
-Configura las variables de entorno:
-
-Crea un archivo .env en la raíz del proyecto y agrega las siguientes variables:
-
-env
-Copy
-PORT=3000
-DB_HOST=localhost
-DB_USER=tu_usuario_sql
-DB_PASSWORD=tu_contraseña_sql
-DB_NAME=taller_mecanico
-JWT_SECRET=tu_clave_secreta
-Configura la base de datos:
-
-Asegúrate de tener SQL Express instalado y en ejecución.
-
-Usa Azure Data Studio para crear la base de datos y las tablas necesarias.
-
-Ejecuta los scripts SQL proporcionados en la carpeta database/ para crear la estructura inicial.
-
-Inicia el servidor:
-
-bash
-Copy
-npm start
-O, si prefieres usar Nodemon para desarrollo:
-
-bash
-Copy
-npm run dev
-📂 Estructura del Proyecto
-Copy
-Backend/
-├── src/
-│   ├── controllers/       # Controladores para manejar las rutas
-│   ├── models/            # Modelos de la base de datos SQL
-│   ├── routes/            # Definición de las rutas de la API
-│   ├── middlewares/       # Middlewares para autenticación y validación
-│   ├── utils/             # Utilidades y helpers
-│   ├── database/          # Scripts SQL para la base de datos
-│   └── app.js             # Configuración de Express
-├── tests/                 # Pruebas unitarias y de integración con Jest
-├── .env                   # Variables de entorno
-├── .gitignore             # Archivos y carpetas ignorados por Git
-├── package.json           # Dependencias y scripts
-└── README.md              # Este archivo
-🌐 Endpoints de la API
-Aquí tienes una lista de los principales endpoints disponibles:
-
-Clientes:
-
-GET /api/clientes - Obtener todos los clientes.
-
-POST /api/clientes - Crear un nuevo cliente.
-
-GET /api/clientes/:id - Obtener un cliente por ID.
-
-PUT /api/clientes/:id - Actualizar un cliente.
-
-DELETE /api/clientes/:id - Eliminar un cliente.
-
-Vehículos:
-
-GET /api/vehiculos - Obtener todos los vehículos.
-
-POST /api/vehiculos - Registrar un nuevo vehículo.
-
-GET /api/vehiculos/:id - Obtener un vehículo por ID.
-
-PUT /api/vehiculos/:id - Actualizar un vehículo.
-
-DELETE /api/vehiculos/:id - Eliminar un vehículo.
-
-Citas:
-
-GET /api/citas - Obtener todas las citas.
-
-POST /api/citas - Programar una nueva cita.
-
-GET /api/citas/:id - Obtener una cita por ID.
-
-PUT /api/citas/:id - Actualizar una cita.
-
-DELETE /api/citas/:id - Eliminar una cita.
 
 🧪 Pruebas
 El proyecto utiliza Jest para realizar pruebas unitarias y de integración. Para ejecutar las pruebas, sigue estos pasos:
 
 Asegúrate de que todas las dependencias estén instaladas.
 
-Ejecuta el siguiente comando:
+Ejecuta el siguiente comando: npm test
 
-bash
-Copy
-npm test
 Esto ejecutará todas las pruebas definidas en la carpeta tests/.
 
 🤝 Contribuciones
-¡Las contribuciones son bienvenidas! Si deseas contribuir al proyecto, sigue estos pasos:
-
-Haz un fork del repositorio.
-
-Crea una nueva rama (git checkout -b feature/nueva-funcionalidad).
-
-Realiza tus cambios y haz commit (git commit -m 'Añadir nueva funcionalidad').
-
-Haz push a la rama (git push origin feature/nueva-funcionalidad).
-
-Abre un Pull Request y describe tus cambios.
+¡Las contribuciones son bienvenidas!
 
 📜 Licencia
 Este proyecto está bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.
