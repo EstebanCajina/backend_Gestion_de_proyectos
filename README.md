@@ -1,93 +1,177 @@
-# Backend
+# 🚗 Taller Mecánico - Backend 🛠️
 
+¡Bienvenido al repositorio del backend para el sistema de gestión de talleres mecánicos! Este proyecto es parte del curso **"Gestión de Proyectos"** y está desarrollado en **Node.js**. Aquí encontrarás toda la información necesaria para configurar, ejecutar y contribuir al proyecto.
 
+---
 
-## Getting started
+## 📋 Descripción del Proyecto
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Este backend está diseñado para gestionar las operaciones de un taller mecánico, incluyendo la administración de clientes, vehículos, citas, reparaciones y más. El sistema permite:
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- 🚘 Registrar y gestionar vehículos.
+- 👥 Administrar clientes y sus historiales.
+- 📅 Programar y gestionar citas.
+- 🔧 Registrar reparaciones y mantenimientos.
+- 📊 Generar reportes y estadísticas.
 
-## Add your files
+El objetivo es proporcionar una solución robusta y escalable para la gestión eficiente de un taller mecánico.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+---
 
-```
-cd existing_repo
-git remote add origin https://git.ucr.ac.cr/grupo_1_gestion_2025/Backend.git
-git branch -M main
-git push -uf origin main
-```
+## 🛠️ Tecnologías Utilizadas
 
-## Integrate with your tools
+- **Node.js**: Entorno de ejecución para JavaScript.
+- **Express.js**: Framework para construir APIs RESTful.
+- **SQL Express**: Base de datos SQL para almacenar la información de manera estructurada y eficiente.
+- **Azure Data Studio**: Herramienta para gestionar y consultar la base de datos SQL de manera visual y eficaz.
+- **JWT (JSON Web Tokens)**: Autenticación basada en tokens para asegurar las rutas y endpoints.
+- **Bcrypt**: Encriptación de contraseñas para garantizar la seguridad de los datos de los usuarios.
+- **Dotenv**: Manejo de variables de entorno para configuraciones sensibles y específicas del entorno.
+- **Jest**: Framework de pruebas para garantizar la calidad del código y la funcionalidad del backend.
 
-- [ ] [Set up project integrations](https://git.ucr.ac.cr/grupo_1_gestion_2025/Backend/-/settings/integrations)
+---
 
-## Collaborate with your team
+## 🚀 Cómo Empezar
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local.
 
-## Test and Deploy
+### 📥 Instalación
 
-Use the built-in continuous integration in GitLab.
+1. Clona el repositorio:
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+   ```bash
+   git clone https://git.ucr.ac.cr/grupo_1_gestion_2025/Backend.git
 
-***
+   
+Navega al directorio del proyecto:
 
-# Editing this README
+bash
+Copy
+cd Backend
+Instala las dependencias:
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+bash
+Copy
+npm install
+Configura las variables de entorno:
 
-## Suggestions for a good README
+Crea un archivo .env en la raíz del proyecto y agrega las siguientes variables:
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+env
+Copy
+PORT=3000
+DB_HOST=localhost
+DB_USER=tu_usuario_sql
+DB_PASSWORD=tu_contraseña_sql
+DB_NAME=taller_mecanico
+JWT_SECRET=tu_clave_secreta
+Configura la base de datos:
 
-## Name
-Choose a self-explaining name for your project.
+Asegúrate de tener SQL Express instalado y en ejecución.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Usa Azure Data Studio para crear la base de datos y las tablas necesarias.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Ejecuta los scripts SQL proporcionados en la carpeta database/ para crear la estructura inicial.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+Inicia el servidor:
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+bash
+Copy
+npm start
+O, si prefieres usar Nodemon para desarrollo:
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+bash
+Copy
+npm run dev
+📂 Estructura del Proyecto
+Copy
+Backend/
+├── src/
+│   ├── controllers/       # Controladores para manejar las rutas
+│   ├── models/            # Modelos de la base de datos SQL
+│   ├── routes/            # Definición de las rutas de la API
+│   ├── middlewares/       # Middlewares para autenticación y validación
+│   ├── utils/             # Utilidades y helpers
+│   ├── database/          # Scripts SQL para la base de datos
+│   └── app.js             # Configuración de Express
+├── tests/                 # Pruebas unitarias y de integración con Jest
+├── .env                   # Variables de entorno
+├── .gitignore             # Archivos y carpetas ignorados por Git
+├── package.json           # Dependencias y scripts
+└── README.md              # Este archivo
+🌐 Endpoints de la API
+Aquí tienes una lista de los principales endpoints disponibles:
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Clientes:
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+GET /api/clientes - Obtener todos los clientes.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+POST /api/clientes - Crear un nuevo cliente.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+GET /api/clientes/:id - Obtener un cliente por ID.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+PUT /api/clientes/:id - Actualizar un cliente.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+DELETE /api/clientes/:id - Eliminar un cliente.
 
-## License
-For open source projects, say how it is licensed.
+Vehículos:
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+GET /api/vehiculos - Obtener todos los vehículos.
+
+POST /api/vehiculos - Registrar un nuevo vehículo.
+
+GET /api/vehiculos/:id - Obtener un vehículo por ID.
+
+PUT /api/vehiculos/:id - Actualizar un vehículo.
+
+DELETE /api/vehiculos/:id - Eliminar un vehículo.
+
+Citas:
+
+GET /api/citas - Obtener todas las citas.
+
+POST /api/citas - Programar una nueva cita.
+
+GET /api/citas/:id - Obtener una cita por ID.
+
+PUT /api/citas/:id - Actualizar una cita.
+
+DELETE /api/citas/:id - Eliminar una cita.
+
+🧪 Pruebas
+El proyecto utiliza Jest para realizar pruebas unitarias y de integración. Para ejecutar las pruebas, sigue estos pasos:
+
+Asegúrate de que todas las dependencias estén instaladas.
+
+Ejecuta el siguiente comando:
+
+bash
+Copy
+npm test
+Esto ejecutará todas las pruebas definidas en la carpeta tests/.
+
+🤝 Contribuciones
+¡Las contribuciones son bienvenidas! Si deseas contribuir al proyecto, sigue estos pasos:
+
+Haz un fork del repositorio.
+
+Crea una nueva rama (git checkout -b feature/nueva-funcionalidad).
+
+Realiza tus cambios y haz commit (git commit -m 'Añadir nueva funcionalidad').
+
+Haz push a la rama (git push origin feature/nueva-funcionalidad).
+
+Abre un Pull Request y describe tus cambios.
+
+📜 Licencia
+Este proyecto está bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.
+
+🙏 Agradecimientos
+Profesor y compañeros del curso: Por su apoyo y colaboración en el desarrollo de este proyecto.
+
+Node.js y SQL Express: Por proporcionar las herramientas necesarias para construir este backend.
+
+📌 Estado del Proyecto
+El proyecto está en desarrollo activo. Si tienes alguna sugerencia o encuentras algún problema, no dudes en abrir un issue en el repositorio.
+
+¡Gracias por visitar nuestro proyecto! 🚀
