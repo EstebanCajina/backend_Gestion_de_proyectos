@@ -81,7 +81,6 @@ async function deleteVehicle(req, res) {
 async function checkPlate(req, res) {
   try {
     const plate = req.params.plate;
-    console.log(plate);
     const exists = await vehicleService.checkPlate(plate);
     res.json(exists);
   } catch (err) {

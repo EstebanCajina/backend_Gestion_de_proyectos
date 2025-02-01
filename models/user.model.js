@@ -10,6 +10,23 @@ async function getAllUsers() {
 
 async function addUser(user) {
   const request = new sql.Request();
+
+  // Validación de los campos requeridos
+  if (!user.username || !user.password || !user.role || user.is_active === undefined) {
+    throw new Error("Faltan campos requeridos: username, password, role o is_active.");
+  }
+
+  //validacion de username que no contenga espacios
+  if (user.username.includes(' ')) {
+    throw new Error("El nombre de usuario no puede contener espacios.");
+  }
+
+  //validación de username que no exista
+  const valid = await validUsername(user.username);
+  if (valid) {
+    throw new Error("El nombre de usuario ya existe.");
+  }
+
   const hashedPassword = crypto.createHash('sha256').update(user.password).digest('hex');
   const query = `
     INSERT INTO Users (username, password, role, profile_picture, is_active)
@@ -26,6 +43,7 @@ async function addUser(user) {
 
   return userId;
 }
+
 async function getUserById(id) {
   const request = new sql.Request();
   const query = `
@@ -39,6 +57,17 @@ async function getUserById(id) {
 
 async function updateUser(id, user) {
   const request = new sql.Request();
+
+  // Validación de los campos requeridos
+  if (!user.username || !user.role || user.is_active === undefined) {
+    throw new Error("Faltan campos requeridos: username, role o is_active.");
+  }
+
+  //validacion de username que no contenga espacios
+  if (user.username.includes(' ')) {
+    throw new Error("El nombre de usuario no puede contener espacios.");
+  }
+
   let query = `
     UPDATE Users
     SET username = @username, role = @role, is_active = @is_active
@@ -73,6 +102,17 @@ async function deleteUser(id) {
 
 async function loginUser(username, password) {
   const request = new sql.Request();
+
+  // Validación de los campos requeridos
+  if (!username || !password) {
+    throw new Error("Faltan campos requeridos: username o password.");
+  }
+
+  //validacion de username que no contenga espacios
+  if (user.username.includes(' ')) {
+    throw new Error("El nombre de usuario no puede contener espacios.");
+  }
+
   const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
   const query = `
     SELECT * FROM Users
@@ -143,7 +183,4 @@ async function updateProfilePicture(id, profile_picture) {
   await request.query(query);
 }
 
-
-  
-
-module.exports = { getAllUsers, addUser, getUserById, updateUser, deleteUser, loginUser,logoutUser, validUsername, updateProfilePicture };
+module.exports = { getAllUsers, addUser, getUserById, updateUser, deleteUser, loginUser, logoutUser, validUsername, updateProfilePicture };

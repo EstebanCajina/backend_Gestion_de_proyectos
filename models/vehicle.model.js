@@ -27,14 +27,9 @@ async function addVehicle(vehicle) {
   }
 
   // Verificar si el vehículo ya existe
-  const checkQuery = `
-    SELECT id FROM Vehicles
-    WHERE plate = @plate
-  `;
-  request.input("plate", sql.NVarChar, vehicle.plate);
-  const checkResult = await request.query(checkQuery);
-  if (checkResult.recordset.length > 0) {
-    return { exists: true, id: checkResult.recordset[0].id };
+  const checkPlateResult = await checkPlate(vehicle.plate);
+  if (checkPlateResult.exists) {
+    return { exists: true, id: checkPlateResult.id };
   }
 
   request = new sql.Request();
@@ -85,6 +80,23 @@ async function updateVehicle(id, vehicle) {
     return null; // Indicar que no se encontró el vehículo
   }
 
+  // Validación de los campos requeridos (excepto Plate)
+  if (!vehicle.dependency || !vehicle.asset_code || !vehicle.brand || !vehicle.style || !vehicle.model_year || !vehicle.heritage) {
+    throw new Error("Faltan campos requeridos: dependency, asset_code, brand, style, heritage o model_year.");
+  }
+
+  // Validación de año de modelo
+  const currentYear = new Date().getFullYear();
+  if (vehicle.model_year < 1990 || vehicle.model_year > currentYear) {
+    throw new Error("El año de modelo debe estar entre 1990 y el año actual.");
+  }
+
+  // Validación del formato de la placa
+  const plateRegex = /^(\d{6}|[A-Za-z]{3}-\d{3})$/; // Formatos: "123456" o "ABC-123"
+  if (!plateRegex.test(vehicle.plate)) {
+    throw new Error("El formato de la placa es incorrecto. Debe ser '123456' o 'ABC-123'.");
+  }
+
   // Si el vehículo existe, realiza la actualización
   const query = `
     UPDATE Vehicles
@@ -92,7 +104,7 @@ async function updateVehicle(id, vehicle) {
         heritage = @Heritage, brand = @Brand, style = @Style, model_year = @ModelYear, is_active = @IsActive
     WHERE id = @id
   `;
-  
+
   request.input("Region", sql.NVarChar, vehicle.region);
   request.input("Dependency", sql.NVarChar, vehicle.dependency);
   request.input("Plate", sql.NVarChar, vehicle.plate);
