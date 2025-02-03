@@ -109,7 +109,7 @@ async function loginUser(username, password) {
   }
 
   //validacion de username que no contenga espacios
-  if (user.username.includes(' ')) {
+  if (username.includes(' ')) {
     throw new Error("El nombre de usuario no puede contener espacios.");
   }
 
